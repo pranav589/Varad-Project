@@ -1,0 +1,33 @@
+.users {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-direction: column;
+}
+
+.usersList {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.user {
+  border: 1px solid black;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 30%;
+}
+
+.user:hover {
+  background-color: lightgray;
+}
+
+.status {
+  background-color: #13f274;
+  margin: 0 !important;
+  padding: 5px;
+}

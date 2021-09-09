@@ -1,23 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Passcode from "./components/Passcode";
+import Users from "./components/Users";
 
 function App() {
+  const [userData, setUserData] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userToEdit, setUserToEdit] = useState(null);
+
+  const [data, setData] = useState([
+    {
+      id: "1",
+      name: "Sam",
+      passcode: "1234",
+      status: "CheckedOut",
+    },
+    {
+      id: "2",
+      name: "Tom",
+      passcode: "1234",
+      status: "CheckedOut",
+    },
+    {
+      id: "3",
+      name: "Brain",
+      passcode: "1234",
+      status: "CheckedOut",
+    },
+  ]);
+
+  //in doubt
+  const updateStatus = (user) => {
+    const userToUpdate = data.findIndex((item) => item.id === user.id);
+    setUserToEdit(userToUpdate);
+  };
+
+  //in doubt
+  const editStatus = () => {
+    let copiedArray = [...data];
+    copiedArray[userToEdit] = { ...copiedArray, status: "CheckedIn" };
+    setData(copiedArray);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Passcode
+        userData={userData}
+        setIsLoggedIn={setIsLoggedIn}
+        isLoggedIn={isLoggedIn}
+        setUserData={setUserData}
+        editStatus={editStatus}
+      />
+      <Users
+        userData={userData}
+        setUserData={setUserData}
+        setIsLoggedIn={setIsLoggedIn}
+        isLoggedIn={isLoggedIn}
+        data={data}
+        updateStatus={updateStatus}
+      />
     </div>
   );
 }
